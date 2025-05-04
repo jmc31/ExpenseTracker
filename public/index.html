@@ -234,13 +234,24 @@
     };
 
     const editExpense = (id, amount, category, description, date) => {
-      currentEditId = id;
-      document.getElementById('amount').value = amount;
-      document.getElementById('category').value = category;
-      document.getElementById('description').value = description;
-      document.getElementById('date').value = date;
-      document.querySelector('button[type="submit"]').innerText = 'Update Expense';
-    };
+  currentEditId = id;
+  
+  // Set the form fields to the existing values
+  document.getElementById('amount').value = parseFloat(amount); 
+  document.getElementById('category').value = category;
+  document.getElementById('description').value = description || '';
+  document.getElementById('date').value = date;
+
+  // Update the submit button text to 'Update Expense'
+  document.querySelector('button[type="submit"]').innerText = 'Update Expense';
+
+  // Show the form if it's hidden
+  if (expenseForm.classList.contains('hidden')) {
+    expenseForm.classList.remove('hidden');
+    showFormButton.classList.add('hidden');
+  }
+};
+
 
     document.getElementById('clearForm').addEventListener('click', () => {
       expenseForm.reset();
